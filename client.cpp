@@ -34,14 +34,63 @@ void Client::ajouterProduit(Produit *produit){
 
 
 void Client::viderPanier() {
-	m_panier.clear();
+	int taille = m_panier.size();
+	for(int i=0; i<taille; i++)
+	{
+		m_panier[i] = nullptr;
+		m_panier.resize(0);
+	}
+}
+
+
+void Client::changerQuantite(Produit *produit, double quantite){
+	int taille =  m_panier.size();
+	for(int i=0; i<taille; i++){
+
+		if(m_panier[i] == produit)
+		{
+			produit->setQuantite(quantite);
+		}
+
+	}
 }
 
 void Client::supprimerProduit(Produit *produit){
-	//m_panier.erase(produit);
+	int taille = m_panier.size();
+
+	for(int i=0; i<taille; i++)
+	{
+		if(m_panier[i] == produit)
+		{
+			m_panier[i] = nullptr;
+			std::cout<<"Le produit à été supprimé"<<std::endl;
+			m_panier.resize(taille-1);
+		}
+	}
 }
 
+std::string Client::recupPanier() {
+	std::string res="";
+	int taille = m_panier.size();
+
+	for(int i=0; i<taille; i++)
+	{
+		res += "Nom article : "+(*m_panier[i]).getTitre()+"	";
+		res += "Quantité : "+std::to_string((*m_panier[i]).getQuantite())+"	";
+		res += "Prix Unitaire : "+std::to_string((*m_panier[i]).getPrix())+"\n";
+	}
+
+	if(res=="")
+	{
+		res = "Le panier est vide";
+	} 
+	return res;
+}
+
+
+
 std::ostream& operator << (std::ostream & output, Client obj){
-	output << obj.m_id << std::endl << obj.m_nom << std:: endl << obj.m_prenom << std::endl;// << obj.m_panier << std::endl;
+
+	output << obj.m_id << std::endl << obj.m_nom << std::endl << obj.m_prenom << std::endl<< obj.recupPanier() << std::endl;
 	return output;
 }

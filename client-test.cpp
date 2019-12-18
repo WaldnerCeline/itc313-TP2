@@ -5,8 +5,8 @@
 
 int main() {
 
-Produit p1("titre1","desc1",8.5,2);
-Produit p2("titre2","desc2",10.5,4);
+Produit p1("Jambon","Le jambon c'est bon",8.5,2);
+Produit p2("Pâtes","Les pâtes c'est bon aussi",10.5,4);
 
 
 //Creation d'un pointeur
@@ -23,22 +23,23 @@ std::vector<Produit*> panier;
 
 
 
-Client c1(1,"NOM","PRENOM",panier);
+Client c1(1,"Dupont","Pierre",panier);
+std::cout<<c1<<std::endl;
 
-c1.getPanier();
 c1.ajouterProduit(ptr1);
 c1.ajouterProduit(ptr2);
 
 std::cout<<c1<<std::endl;
 
-c1.getPanier();
-//c1.supprimerProduit(ptr2);
-//c1.getPanier();
+c1.changerQuantite(ptr2,1000);
+std::cout<<c1<<std::endl;
+
+c1.supprimerProduit(ptr2);
+std::cout<<c1<<std::endl;
+
 
 c1.viderPanier();
-c1.getPanier();
-
-std::cout<<"OK"<<std::endl;
+std::cout<<c1<<std::endl;
 
 return 0;
 }
