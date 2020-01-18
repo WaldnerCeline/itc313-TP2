@@ -1,6 +1,7 @@
 #include "client.h"
 #include <string>
 #include <vector>
+#include <iostream>
 
 Client::Client(int id, std::string nom, std::string prenom, std::vector<Produit*> panier){
 	m_id = id;
@@ -27,9 +28,20 @@ std::vector<Produit*> Client::getPanier()const{
 	return m_panier;
 }
 
+double getQuantiteCommande() const{
+	return m_quantite_commande;
+}
 
-void Client::ajouterProduit(Produit *produit){
-	m_panier.push_back(produit);
+void Client::ajouterProduit(Produit *produit, double quantite_commande){
+
+	if ((*produit).getQuantite() >= quantite_commande){
+		 m_quantite_commande = quantite_commande;
+		 m_panier.push_back(produit);
+	}
+	else{
+		std::cout <<"Il n'y a pas assez d'articles en stock";
+	}
+
 }
 
 
@@ -43,14 +55,23 @@ void Client::viderPanier() {
 }
 
 
-void Client::changerQuantite(Produit *produit, double quantite){
+void Client::changerQuantite(Produit *produit, double quantite_commande){
 	int taille =  m_panier.size();
 	for(int i=0; i<taille; i++){
 
 		if(m_panier[i] == produit)
 		{
-			produit->setQuantite(quantite);
+		 if (produit.getQuantite() >= quantite_commande){
+		 	m_quantite_commande = quantite_commande;
+		 }
+		 else{
+		 	std::cout <<"Il n'y a pas assez d'articles en stock";
+		 }
 		}
+		else{
+			std::cout << "Cet article n'est pas dans votre panier";
+		}
+		
 
 	}
 }

@@ -80,7 +80,7 @@ void Produit::modifQuantite(double quantite){
 
 
 std::ostream& operator << (std::ostream & output, Produit obj){
-	output << obj.m_titre << std::endl << obj.m_prix << std::endl << "Prix unitaire : " << obj.m_prix<< std::endl << "Quantite restante : "<< obj.m_quantite << std::endl;
+	output << obj.m_titre << std::endl << obj.m_detail << std::endl << "Prix unitaire : " << obj.m_prix<< std::endl << "Quantite restante : "<< obj.m_quantite << std::endl;
 	return output;
 }
 

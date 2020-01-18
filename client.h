@@ -18,11 +18,13 @@ public:
 	std::string getNom()const;
 	std::string getPrenom()const;
 	std::vector<Produit*> getPanier()const;
+	double getQuantiteCommande() const;
+	
 
 	void ajouterProduit(Produit *produit);
 	void viderPanier();
 	void supprimerProduit(Produit *produit);
-	void changerQuantite(Produit *produit, double quantite);
+	void changerQuantite(Produit *produit, double quantite_commande);
 	std::string recupPanier();
 
 	friend std::ostream& operator << (std::ostream &output, Client obj);
@@ -31,5 +33,6 @@ private:
 	std::string m_nom;
 	std::string m_prenom;
 	std::vector<Produit*> m_panier;
+	double m_quantite_commande;
 };
 #endif
