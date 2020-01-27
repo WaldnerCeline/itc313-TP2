@@ -74,8 +74,22 @@ void Produit::modifQuantite(double quantite){
 		m_quantite = quantite;
 	}
 	else{
-		std::cout<< "Prix incorrect"<< std::endl;
+		std::cout<< "Erreur de quantite"<< std::endl;
 	}
+}
+
+void Produit::setQuantiteCommande(double quantite_commande){
+	if(quantite_commande >=0 && m_quantite > quantite_commande){
+		m_quantite_commande = quantite_commande;
+	}
+	else{
+		std::cout<< "Erreur de quantite ou pas assez d'article en stock "<< std::endl;
+	}
+
+}
+
+double Produit::getQuantiteCommande() const{
+	return m_quantite_commande;
 }
 
 

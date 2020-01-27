@@ -20,12 +20,14 @@ public:
 	std::string getDetail() const;
 	double getQuantite() const;
 	double getPrix() const;
+	double getQuantiteCommande() const;
 
 	void setTitre(std::string titre);
 	void setDetail(std::string detail);
 	void setQuantite(double quantite);
 	void setPrix(double prix);
 	void modifQuantite(double quantite);
+	void setQuantiteCommande(double quantite_commande);
 
 	friend std::ostream& operator << (std::ostream &output, Produit obj);
 
@@ -34,6 +36,7 @@ private:
 	std::string m_detail;
 	double m_quantite;
 	double m_prix;
+	double m_quantite_commande;
 	
 
 
