@@ -1,9 +1,9 @@
 #ifndef _magasin_h
 #define _magasin_h
 
-#include "Client.h"
-#include "Produit.h"
-#include "Commande.h"
+#include "client.h"
+#include "produit.h"
+#include "commande.h"
 
 #include <vector>
 #include <string>
@@ -14,12 +14,23 @@ public:
 		std::vector<Client*> liste_client,
 		std::vector<Commande*> liste_commande);
 
-	void addProduit(Produit produit);
-	std::string afficherListeProduit();
+	void ajouterProduit(Produit *produit);
+	void afficherListeProduit();
+	void afficherProduit(Produit *produit);
+	void quantiteProduit(Produit *produit, double quantite);
 
-	std::vector getProduit()const;
-	std::vector getClient()const;
-	std::vector getCommande()const;
+
+	void ajouterClient(Client *client);
+	void afficherListeClient();
+	void afficherClient(std::string nom, int id);
+
+	void ajouterProduitClient(Produit *produit, Client *client);
+	void supprimerProduitClient(Produit *produit, Client *client);
+	void modifierQuantiteProduitClient(Produit *produit, Client *client, double quantite);
+
+	std::vector<Produit*> getProduit()const;
+	std::vector<Client*> getClient()const;
+	std::vector<Commande*> getCommande()const;
 
 private :
 	std::vector<Produit*> m_produit;

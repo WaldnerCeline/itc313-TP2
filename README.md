@@ -1,8 +1,9 @@
 # itc313-TP2
 
-Création de la classe Magasin: (a finir)
--Besoin des classes Produit,Commande,Client pour compiler et tester !
--Revoir fonction afficherListeProduit() 
+Création de la classe Magasin OK 
 
 
 Classe Client OK
+
+
+Ajout de fonctionnalités à magasin (OK)
