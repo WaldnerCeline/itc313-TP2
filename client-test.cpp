@@ -5,7 +5,7 @@
 
 int main() {
 
-Produit p1("Jambon","Le jambon c'est bon",8.5,2);
+Produit p1("Jambon","Le jambon c'est bon",8.5,10);
 Produit p2("Pâtes","Les pâtes c'est bon aussi",10.5,4);
 
 
@@ -26,20 +26,17 @@ std::vector<Produit*> panier;
 Client c1(1,"Dupont","Pierre",panier);
 std::cout<<c1<<std::endl;
 
-c1.ajouterProduit(ptr1);
-c1.ajouterProduit(ptr2);
+c1.ajouterProduit(ptr1, 5);
+c1.ajouterProduit(ptr2, 3);
 
 std::cout<<c1<<std::endl;
 
-c1.changerQuantite(ptr2,1000);
-std::cout<<c1<<std::endl;
-
-c1.supprimerProduit(ptr2);
-std::cout<<c1<<std::endl;
-
+//c1.changerQuantiteCommande(ptr1, 1);
+//std::cout<<c1<<std::endl;
 
 c1.viderPanier();
 std::cout<<c1<<std::endl;
+
 
 return 0;
 }

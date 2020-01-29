@@ -1,6 +1,7 @@
 #include "client.h"
 #include <string>
 #include <vector>
+#include <iostream>
 
 Client::Client(int id, std::string nom, std::string prenom, std::vector<Produit*> panier){
 	m_id = id;
@@ -28,7 +29,9 @@ std::vector<Produit*> Client::getPanier()const{
 }
 
 
-void Client::ajouterProduit(Produit *produit){
+
+void Client::ajouterProduit(Produit *produit, double quantite_commande){
+	(*produit).setQuantiteCommande(quantite_commande);
 	m_panier.push_back(produit);
 }
 
@@ -43,15 +46,19 @@ void Client::viderPanier() {
 }
 
 
-void Client::changerQuantite(Produit *produit, double quantite){
+void Client::changerQuantiteCommande(Produit *produit, double quantite_commande){
 	int taille =  m_panier.size();
+	int compteur =0;
 	for(int i=0; i<taille; i++){
-
-		if(m_panier[i] == produit)
-		{
-			produit->setQuantite(quantite);
-		}
-
+		
+			if(m_panier[i] == produit){
+				(*(m_panier[i])).setQuantiteCommande(quantite_commande);
+				compteur ++;
+			}
+		
+			else if(compteur == 0){
+				std::cout << "Cet article n'est pas dans votre panier ";
+			}
 	}
 }
 
@@ -72,17 +79,22 @@ void Client::supprimerProduit(Produit *produit){
 std::string Client::recupPanier() {
 	std::string res="";
 	int taille = m_panier.size();
-
-	for(int i=0; i<taille; i++)
-	{
-		res += "Nom article : "+(*m_panier[i]).getTitre()+"	";
-		res += "Quantité : "+std::to_string((*m_panier[i]).getQuantite())+"	";
-		res += "Prix Unitaire : "+std::to_string((*m_panier[i]).getPrix())+"\n";
+	double prix=0;
+	int compteur =0;
+	std::cout<<"Le panier contient : "<<std::endl;
+	for(int i=0; i<taille; i++){
+		compteur++;
+		res += " Nom article : "+(*m_panier[i]).getTitre()+"	";
+		res += " Quantité : "+std::to_string((*m_panier[i]).getQuantiteCommande())+"	";
+		res += " Prix Unitaire : "+std::to_string((*m_panier[i]).getPrix())+"\n";
+		prix += ((*m_panier[i]).getQuantiteCommande())*((*m_panier[i]).getPrix());
 	}
-
+	if(compteur != 0){
+		res += " Le prix total du panier est : "+std::to_string(prix);
+	}
 	if(res=="")
 	{
-		res = "Le panier est vide";
+		res = " Le panier est vide";
 	} 
 	return res;
 }
@@ -91,6 +103,6 @@ std::string Client::recupPanier() {
 
 std::ostream& operator << (std::ostream & output, Client obj){
 
-	output << obj.m_id << std::endl << obj.m_nom << std::endl << obj.m_prenom << std::endl<< obj.recupPanier() << std::endl;
+	output << "ID client " << obj.m_id << std::endl << obj.m_nom << " " << obj.m_prenom << std::endl<< obj.recupPanier() << std::endl;
 	return output;
 }
