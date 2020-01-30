@@ -25,10 +25,13 @@ public:
 	Client* getClientCommande() const;
 	std::vector<Produit*> getProduitCommande() const;
 	std::string getStatutCommande() const;
+	int getIDCommande() const;
+
 
 	void setClientCommande(Client* client_commande);
 	void setProduitCommande(std::vector<Produit*> produit_commande);
 	void setStatutCommande(bool statut_commande);
+	void setIDCommande(int id);
 
 	std::string recupListeProduit() const;
 	std::string recupInfoClient() const;
@@ -39,6 +42,7 @@ private:
 	Client* m_client_commande;
 	std::vector<Produit*> m_produit_commande;
 	bool m_statut_commande;
+	int m_id;
 
 
 

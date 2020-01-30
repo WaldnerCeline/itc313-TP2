@@ -13,6 +13,7 @@
 #include "produit.h"
 
 Commande::Commande(Client* client_commande,std::vector<Produit*> produit_commande, bool statut_commande){
+	m_id = 0;
 	m_client_commande = client_commande;
 	m_produit_commande = produit_commande;
 	m_statut_commande = statut_commande;
@@ -22,6 +23,10 @@ Client* Commande::getClientCommande() const{
 	return m_client_commande;
 }
 
+int Commande::getIDCommande() const{
+	return m_id;
+}
+
 std::vector<Produit*> Commande::getProduitCommande() const{
 	return m_produit_commande;
 }
@@ -29,10 +34,10 @@ std::vector<Produit*> Commande::getProduitCommande() const{
 std::string Commande::getStatutCommande() const{
 	std::string statut;
 	if(m_statut_commande == true){
-		statut = "Livré";
+		statut = "Livrée";
 	}
 	else{
-		statut = "Non Livré";
+		statut = "Non Livrée";
 	}
 	return statut;
 }
@@ -50,6 +55,9 @@ void Commande::setStatutCommande(bool statut_commande){
 	m_statut_commande = statut_commande;
 }
 
+void Commande::setIDCommande(int id){
+	m_id = id;
+}
 
 std::string Commande::recupListeProduit() const{
 	std::string affichage;

@@ -69,13 +69,8 @@ void Produit::setPrix(double prix){
 	}
 }
 
-void Produit::modifQuantite(double quantite){
-	if(quantite >=0){
-		m_quantite = quantite;
-	}
-	else{
-		std::cout<< "Erreur de quantite"<< std::endl;
-	}
+void Produit::modifQuantite(double quantite){ // Pour mettre a jour les stocks en plus ou en moins 
+		m_quantite = m_quantite + quantite;
 }
 
 void Produit::setQuantiteCommande(double quantite_commande){

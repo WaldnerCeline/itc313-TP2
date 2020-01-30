@@ -146,8 +146,48 @@ void ajoutProduit(Magasin EasyStore){
 }
 
 
+
+void majQuantite(Magasin EasyStore){
+	double quantite;
+	std::string nom;
+	int choix;
+	std::vector<Produit*> produit;
+	produit = EasyStore.getClient();
+	std::cout<<" Entrez le nom du produit a modifier "<<std::endl;
+	cin>> nom;
+	for(int i = 0; i<int(produit.size()); i++){
+		if((*produit).getTitre() == (*m_produit[i]).getTitre()){
+			std::cout<<" Entrez la quantite de produit a modifier "<<std::endl;
+			cin>> quantite;
+			do{
+				std::cout<< "1 - Ajout de produits"<<std::endl;
+				std::cout<<std::endl;
+				std::cout<< "2 - Suppression de produits"<<std::endl;
+				std::cout<<std::endl;
+				std::cout<< "Entrez votre choix"<< std::endl;
+				std::cin >> choix;
+
+				switch(choix){
+					case 1 :
+						(*m_produit[i]).modifQuantite(quantite);
+						break;
+					case 2 :
+						(*m_produit[i]).modifQuantite( -quantite);
+						break;
+					default :
+						std::cout<<"Votre choix ne correspond à aucune proposition "<<std::endl;
+
+				}
+			}
+			while(choix < 1 ||choix >2);			
+		}
+	}
+}
+
+
 void affichageMagasin(Magasin EasyStore){
 	int choix;
+	do{
 		std::cout<<" Gestion du magasin "<<std::endl;
 		std::cout<< "1 - Ajout d’un produit"<<std::endl;
 		std::cout<<std::endl;
@@ -165,10 +205,10 @@ void affichageMagasin(Magasin EasyStore){
 				ajouterProduit(Magasin EasyStore);
 				break;
 			case 2 :
-				
+				EasyStore.afficherListeProduit();
 				break;
 			case 3 :
-				 
+				majQuantite(Magasin EasyStore);
 				break;
 			case 4 :
 				affichageMenu();
@@ -176,10 +216,13 @@ void affichageMagasin(Magasin EasyStore){
 			default :
 				std::cout<<"Votre choix ne correspond à aucune proposition "<<std::endl;
 		}
+	}
+	while(choix<1 || choix >4 );
 }
 
 void affichageClient(Magasin EasyStore){
 	int choix;
+	do{
 		std::cout<<" Gestion des clients "<<std::endl;
 		std::cout<< "1 - Ajout d’un client"<<std::endl;
 		std::cout<<std::endl;
@@ -195,21 +238,22 @@ void affichageClient(Magasin EasyStore){
 				
 				break;
 			case 2 :
-				
+				EasyStore.afficherListeClient();
 				break;
 			case 3 :
-				 
-				break;
-			case 4 :
 				affichageMenu(Magasin EasyStore);
 				break;
 			default :
 				std::cout<<"Votre choix ne correspond à aucune proposition "<<std::endl;
 		}
+	}
+	while(choix<1 || choix > 3);
 }
+
 
 void affichageCommande(Magasin EasyStore){
 	int choix;
+	do{
 		std::cout<<" Gestion des commandes "<<std::endl;
 		std::cout<< "1 - Affichage des commandes"<<std::endl;
 		std::cout<<std::endl;
@@ -238,10 +282,13 @@ void affichageCommande(Magasin EasyStore){
 			default :
 				std::cout<<"Votre choix ne correspond à aucune proposition "<<std::endl;
 		}
+	}
+	while(choix < 1 || choix >4);
 }
 
 void affichageMenu(Magasin EasyStore){
 	int choix;
+	do{
 		std::cout<<" Menu Principal "<<std::endl;
 		std::cout<< "1 - Gestion du magasin"<<std::endl;
 		std::cout<<std::endl;
@@ -270,6 +317,8 @@ void affichageMenu(Magasin EasyStore){
 			default :
 				std::cout<<"Votre choix ne correspond à aucune proposition "<<std::endl;
 		}
+	}
+	while(choix<1 || choix > 4);
 }
 
 
@@ -280,8 +329,18 @@ int main(){
 	std::vector<Commande*> liste_commande;
 	Magasin EasyStore(liste_produit, liste_client, liste_commande);
 	affichageMenu(EasyStore);
+	Client c1(1,"Dupont","Pierre",panier);
+	Client *ref_client;
+	ref_client = &c1;
+	Produit p1("Jambon","Le jambon c'est bon",8.5,10);
+	Produit *ref_produit;
+	ref_produit = &p1;
+	EasyStore.ajouterProduit(ref_produit);
+	EasyStore.afficherListeProduit();
+	EasyStore.ajouterClient(ref_client);
+	EasyStore.afficherListeClient();
+	EasyStore.ajouterProduitClient(ref_client, ref_produit, 3);
 
-	delete [] ref_produit;
 return 0;	
 
 
