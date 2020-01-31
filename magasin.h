@@ -27,8 +27,10 @@ public:
 	void ajouterProduitClient(Client *client, Produit *produit, double quantite);
 	void supprimerProduitClient(Produit *produit, Client *client);
 	void modifierQuantiteProduitClient(Produit *produit, Client *client, double quantite);
-	int validerCommande(Client *client);
-	void changerStatutCommande(Commande *commande);
+	void validerCommande(Client *client);
+	void changerStatutCommande(int id);
+	void afficherListeCommande();
+	void afficherListeCommandeClient(Client *client);
 
 	std::vector<Produit*> getProduit()const;
 	std::vector<Client*> getClient()const;

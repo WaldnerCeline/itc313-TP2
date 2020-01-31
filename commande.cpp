@@ -59,21 +59,21 @@ void Commande::setIDCommande(int id){
 	m_id = id;
 }
 
-std::string Commande::recupListeProduit() const{
+std::string Commande::recupListeProduit() const{ // pour affichage des produits
 	std::string affichage;
 	double prix;
 	int taille =  m_produit_commande.size();
 	for(int i=0 ; i< taille; i++){
 		prix += ((*m_produit_commande[i]).getQuantiteCommande())*((*m_produit_commande[i]).getPrix());
-		affichage += (*m_produit_commande[i]).getTitre() + "\n " + (*m_produit_commande[i]).getDetail() + "\n  Prix unitaire : " + std::to_string((*m_produit_commande[i]).getPrix()) + "\n  Quantite : "+  std::to_string((*m_produit_commande[i]).getQuantiteCommande()) + "\n" + "\n";  
+		affichage += " "+ (*m_produit_commande[i]).getTitre() + "\n" + " "+ (*m_produit_commande[i]).getDetail() + "\n Prix unitaire : " + std::to_string((*m_produit_commande[i]).getPrix()) + "\n Quantite : "+  std::to_string((*m_produit_commande[i]).getQuantiteCommande()) + "\n" + "\n";  
 	}
-	affichage+= "Prix total de la commande : " +std::to_string(prix) +"\n";
+	affichage+= " Prix total de la commande : " +std::to_string(prix) +"\n";
 	return affichage;
 }
 
-std::string Commande::recupInfoClient() const{
+std::string Commande::recupInfoClient() const{ //pour affichage du client lie a la commande
 	std::string affichage;
-	affichage = "ID client " + std::to_string((*m_client_commande).getId()) + "\n" + (*m_client_commande).getNom() + " " + (*m_client_commande).getPrenom() +"\n";
+	affichage = " ID client " + std::to_string((*m_client_commande).getId()) + "\n" + " "+ (*m_client_commande).getNom() + " " + (*m_client_commande).getPrenom() +"\n";
 	
 return affichage;
 }
@@ -82,8 +82,8 @@ return affichage;
 
 
 
-std::ostream& operator << (std::ostream & output, Commande liste_commande){
-	output << liste_commande.recupInfoClient() + "\n" + "Contenu de la commande : " + "\n" << liste_commande.recupListeProduit()+ "\nStatut de la commande : " << liste_commande.getStatutCommande() << std::endl;
+std::ostream& operator << (std::ostream & output, Commande liste_commande){ // surcharge de cout
+	output << " ID commande : " + std::to_string(liste_commande.m_id) + "\n" + " " + liste_commande.recupInfoClient() + "\n" + " Contenu de la commande : " + "\n" << liste_commande.recupListeProduit()+ "\n Statut de la commande : " << liste_commande.getStatutCommande() << std::endl;
 	return output;
 }
 

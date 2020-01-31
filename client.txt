@@ -1,0 +1,8 @@
+ Liste des clients 
+
+  client : 1
+ Dupont Pierre
+
+  client : 2
+ Potter Harry
+

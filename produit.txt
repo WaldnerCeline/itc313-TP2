@@ -1,0 +1,17 @@
+ Inventaire du magasin 
+
+ PS5
+  Console de jeu de marque Sony
+ Prix unitaire : 249.99
+ Quantite restante : 10
+
+ Xbox
+  Console de jeu 
+ Prix unitaire : 349.66
+ Quantite restante : 15
+
+ Jambon
+ Le jambon c'est bon
+ Prix unitaire : 8.5
+ Quantite restante : 10
+

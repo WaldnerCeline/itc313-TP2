@@ -30,7 +30,7 @@ std::vector<Produit*> Client::getPanier()const{
 
 
 
-void Client::ajouterProduit(Produit *produit, double quantite_commande){
+void Client::ajouterProduit(Produit *produit, double quantite_commande){ // ajout d'un prdoduit au panier
 	(*produit).setQuantiteCommande(quantite_commande);
 	m_panier.push_back(produit);
 }
@@ -46,7 +46,7 @@ void Client::viderPanier() {
 }
 
 
-void Client::changerQuantiteCommande(Produit *produit, double quantite_commande){
+void Client::changerQuantiteCommande(Produit *produit, double quantite_commande){ //modifier la quantite d'un produit a commander
 	int taille =  m_panier.size();
 	int compteur =0;
 	for(int i=0; i<taille; i++){
@@ -57,12 +57,12 @@ void Client::changerQuantiteCommande(Produit *produit, double quantite_commande)
 			}
 		
 			else if(compteur == 0){
-				std::cout << "Cet article n'est pas dans votre panier ";
+				std::cout << " Cet article n'est pas dans votre panier ";
 			}
 	}
 }
 
-void Client::supprimerProduit(Produit *produit){
+void Client::supprimerProduit(Produit *produit){ //supprimer un produit du panier
 	int taille = m_panier.size();
 
 	for(int i=0; i<taille; i++)
@@ -70,18 +70,18 @@ void Client::supprimerProduit(Produit *produit){
 		if(m_panier[i] == produit)
 		{
 			m_panier[i] = nullptr;
-			std::cout<<"Le produit à été supprimé"<<std::endl;
+			std::cout<<" Le produit à été supprimé"<<std::endl;
 			m_panier.resize(taille-1);
 		}
 	}
 }
 
-std::string Client::recupPanier() {
+std::string Client::recupPanier() { // pour l'affichage du panier
 	std::string res="";
 	int taille = m_panier.size();
 	double prix=0;
 	int compteur =0;
-	std::cout<<"Le panier contient : "<<std::endl;
+	std::cout<<" Le panier contient : "<<std::endl;
 	for(int i=0; i<taille; i++){
 		compteur++;
 		res += " Nom article : "+(*m_panier[i]).getTitre()+"	";
@@ -101,8 +101,8 @@ std::string Client::recupPanier() {
 
 
 
-std::ostream& operator << (std::ostream & output, Client obj){
+std::ostream& operator << (std::ostream & output, Client obj){ //surcharge de cout
 
-	output << "ID client " << obj.m_id << std::endl << obj.m_nom << " " << obj.m_prenom << std::endl<< obj.recupPanier() << std::endl;
+	output << " ID client " << obj.m_id << std::endl << " "<<obj.m_nom << " " << obj.m_prenom << std::endl<< obj.recupPanier() << std::endl;
 	return output;
 }

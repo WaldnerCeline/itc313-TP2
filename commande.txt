@@ -1,0 +1,35 @@
+ Liste des commandes 
+
+ ID commande : 1
+  ID client 1
+ Dupont Pierre
+
+ Contenu de la commande : 
+ PS5
+  Console de jeu de marque Sony
+ Prix unitaire : 249.990000
+ Quantite : 3.000000
+
+ Xbox
+  Console de jeu 
+ Prix unitaire : 349.660000
+ Quantite : 5.000000
+
+ Prix total de la commande : 2498.270000
+
+ Statut de la commande : Non Livrée
+
+ ID commande : 2
+  ID client 2
+ Potter Harry
+
+ Contenu de la commande : 
+ Jambon
+ Le jambon c'est bon
+ Prix unitaire : 8.500000
+ Quantite : 2.000000
+
+ Prix total de la commande : 17.000000
+
+ Statut de la commande : Non Livrée
+

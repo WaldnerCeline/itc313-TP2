@@ -15,36 +15,40 @@ Magasin::Magasin(std::vector<Produit*> liste_produit, std::vector<Client*> liste
 
 
 
-void Magasin::ajouterProduit(Produit *produit){
+void Magasin::ajouterProduit(Produit *produit){ // on ajoute un produit au stock du magasin
 	m_produit.push_back(produit);
+	
 }
 
 
-void Magasin::afficherListeProduit(){
+void Magasin::afficherListeProduit(){ //affichage de la liste des produits du magasin
 
 	std::string res = "";
 	int taille = m_produit.size();
+	std::cout<<"Taille mproduit" << taille <<std::endl;
+	std::cout<<" Inventaire du magasin "<<std::endl;
 	std::cout<<std::endl;
-	std::cout<<"Inventaire du magasin"<<std::endl;
-	std::cout<<std::endl;
+	for(int i=0; i< int(m_produit.size()); i++){
+		std::cout<<"verif 2 "<< (*m_produit[i])<< std::endl;
+	}
 	for(int i=0; i<taille; i++)
 	{
-		res +=(*m_produit[i]).getTitre()+"\n";
-		res +=(*m_produit[i]).getDetail()+"\n";
-		res += "Prix unitaire : " + std::to_string((*m_produit[i]).getPrix())+"\n";
-		res += "Quantite restante : " +std::to_string((*m_produit[i]).getQuantite())+"\n";
+		res +=" "+(*m_produit[i]).getTitre()+"\n";
+		res +=" "+(*m_produit[i]).getDetail()+"\n";
+		res += " Prix unitaire : " + std::to_string((*m_produit[i]).getPrix())+"\n";
+		res += " Quantite restante : " +std::to_string((*m_produit[i]).getQuantite())+"\n";
 		res +="\n";
 	}
 
 	if(res=="")
 	{
-		std::cout<<"Il n'y a pas de produit dans le magasin"<<std::endl;
+		std::cout<<" Il n'y a pas de produit dans le magasin"<<std::endl;
 	}else{
 		std::cout<<res<<std::endl;
 	}
 }
 
-void Magasin::afficherProduit(Produit *produit){
+void Magasin::afficherProduit(Produit *produit){ // affichage des infos d'un objet
 
 	int taille = m_produit.size();
 	std::string res="";
@@ -53,10 +57,10 @@ void Magasin::afficherProduit(Produit *produit){
 	{
 		if(m_produit[i] == produit)
 		{
-			res +=(*m_produit[i]).getTitre()+"\n";
-			res +=(*m_produit[i]).getDetail()+"\n";
-			res += "Prix unitaire : " + std::to_string((*m_produit[i]).getPrix())+"\n";
-			res += "Quantite restante : " +std::to_string((*m_produit[i]).getQuantite())+"\n";
+			res +=" "+(*m_produit[i]).getTitre()+"\n";
+			res +=" "+(*m_produit[i]).getDetail()+"\n";
+			res += " Prix unitaire : " + std::to_string((*m_produit[i]).getPrix())+"\n";
+			res += " Quantite restante : " +std::to_string((*m_produit[i]).getQuantite())+"\n";
 			res +="\n";
 		}
 	}
@@ -65,7 +69,7 @@ void Magasin::afficherProduit(Produit *produit){
 
 }
 
-void Magasin::quantiteProduit(Produit *produit,double quantite){
+void Magasin::quantiteProduit(Produit *produit,double quantite){ //changer la quantite dans le stock du magasin d'un objet donne 
 
 	std::string res="";
 	int taille = m_produit.size();
@@ -83,42 +87,42 @@ void Magasin::quantiteProduit(Produit *produit,double quantite){
 }
 
 
-void Magasin::ajouterClient(Client *client){
+void Magasin::ajouterClient(Client *client){ // ajouter un nouveau client au magasin
 	m_client.push_back(client);
 }
 
-void Magasin::afficherListeClient(){
+void Magasin::afficherListeClient(){ // afficgher la liste de clients
 	std::string res = "";
 	int taille = m_client.size();
 	std::cout<<std::endl;
-	std::cout<<"Liste des clients"<<std::endl;
+	std::cout<<" Liste des clients"<<std::endl;
 	std::cout<<std::endl;
 	for(int i=0; i<taille; i++){
-		res += "ID client : "+std::to_string((*m_client[i]).getId())+"\n";
-		res +=(*m_client[i]).getNom()+" " + (*m_client[i]).getPrenom()+"\n";
+		res += " ID client : "+std::to_string((*m_client[i]).getId())+"\n";
+		res +=" "+(*m_client[i]).getNom()+" " + (*m_client[i]).getPrenom()+"\n";
 		res +="\n";
 	}
 
 	if(res=="")
 	{
-		std::cout<<"Il n'y a pas de client dans le magasin"<<std::endl;
+		std::cout<<" Il n'y a pas de client dans le magasin"<<std::endl;
 	}else {
 		std::cout<<res<<std::endl;
 	}
 
 }
 
-void Magasin::afficherClient(std::string nom, int id) {
+void Magasin::afficherClient(std::string nom, int id) { // afficher les informations d'un client donné
 	int taille = m_client.size();
 	if(taille == 0) {
-		std::cout<<"Il n'y a pas de client dans le magasin"<<std::endl;
+		std::cout<<" Il n'y a pas de client dans le magasin"<<std::endl;
 	}else{
 		for(int i=0; i<taille; i++) {
 			if(((*m_client[i]).getNom() == nom) || ((*m_client[i]).getId() == id))
 			{
 				std::string res = "";
-				res += "ID client: "+std::to_string((*m_client[i]).getId())+"\n";
-				res +=(*m_client[i]).getNom()+" " + (*m_client[i]).getPrenom()+"\n";
+				res += " ID client: "+std::to_string((*m_client[i]).getId())+"\n";
+				res +=" "+(*m_client[i]).getNom()+" " + (*m_client[i]).getPrenom()+"\n";
 				res +="\n";
 
 				std::cout<<res<<std::endl;
@@ -127,11 +131,11 @@ void Magasin::afficherClient(std::string nom, int id) {
 	}
 }
 
-void Magasin::ajouterProduitClient(Client *client, Produit *produit, double quantite) {
+void Magasin::ajouterProduitClient(Client *client, Produit *produit, double quantite) { // ajout d'un produit au panier du client
 	int taille = m_client.size();
 
 	if(taille == 0){
-		std::cout<<"Il n'y a pas de client dans le magasin"<<std::endl;
+		std::cout<<" Il n'y a pas de client dans le magasin"<<std::endl;
 	}else{
 		for(int i=0; i<taille; i++){
 			if((*m_client[i]).getNom() == client->getNom()){
@@ -141,11 +145,11 @@ void Magasin::ajouterProduitClient(Client *client, Produit *produit, double quan
 	}
 }
 
-void Magasin::supprimerProduitClient(Produit *produit, Client *client) {
+void Magasin::supprimerProduitClient(Produit *produit, Client *client) { //suppriler un produit du panier d'un client
 	int taille = m_client.size();
 
 	if(taille == 0){
-		std::cout<<"Il n'y a pas de client dans le magasin"<<std::endl;
+		std::cout<<" Il n'y a pas de client dans le magasin"<<std::endl;
 	}else{
 		for(int i=0; i<taille; i++){
 			if((*m_client[i]).getNom() == client->getNom()){
@@ -156,11 +160,11 @@ void Magasin::supprimerProduitClient(Produit *produit, Client *client) {
 
 }
 
-void Magasin::modifierQuantiteProduitClient(Produit *produit, Client *client, double quantite){
+void Magasin::modifierQuantiteProduitClient(Produit *produit, Client *client, double quantite){ // modifier la quantite d'un produit dans le panier client
 	int taille = m_client.size();
 
 		if(taille == 0){
-			std::cout<<"Il n'y a pas de client dans le magasin"<<std::endl;
+			std::cout<<" Il n'y a pas de client dans le magasin"<<std::endl;
 		}else{
 			for(int i=0; i<taille; i++){
 				if((*m_client[i]).getNom() == client->getNom()){
@@ -171,59 +175,62 @@ void Magasin::modifierQuantiteProduitClient(Produit *produit, Client *client, do
 }
 
 
-int Magasin::validerCommande(Client *client){
+void Magasin::validerCommande(Client *client){ // valider la panier d'un client pour le transformer en commande
 	std::vector<Produit*> commande_client;
 	commande_client = (*client).getPanier();
 	int taille = m_client.size();
 	int taille_commande = commande_client.size();
 	int id= 0;
-	if(taille_commande != 0){
-		Commande commande1(client, commande_client, false);
-		Commande *ref_commande;
-		ref_commande = &commande1;
+	int compteur =0;
+		Commande* ref_commande(0); //declaration d'un pointeur sur une commande
+		ref_commande = new Commande (client, commande_client, false);
 		id = m_commande.size()+1;
-		commande1.setIDCommande(id);
+		(*ref_commande).setIDCommande(id);
 		m_commande.push_back(ref_commande);
+		taille_commande = commande_client.size();
 		for(int i=0; i<taille; i++) {
-			if((*client).getNom()!= (*m_client[i]).getNom() ){
-				ajouterClient(client);
+			if((*client).getNom()!= (*m_client[i]).getNom() ){ // on regarde si le client fait deja partie du magasin, si non, on l'ajoute
+				compteur++;
 			}	
 		}
+		if(compteur == taille){
+		ajouterClient(client);
+		}
+	if(taille_commande == 0){
+		std::cout<<" Le panier est vide, impossible de valider la commande"<<std::endl;
 	}
-	else{
-		std::cout<<"Le panier est vide, impossible de valider la commande"<<std::endl;
-	}
-return id;
 }
 
-void Magasin::changerStatutCommande(Commande *commande){
+void Magasin::changerStatutCommande(int id){ //On livre la commande
 	int taille = m_commande.size();
-	int choix;
+	int id_commande;
+	int compteur;
+	double quantite_commande;
+	std::string statut;
 	for(int i =0; i < taille; i++){
-		if((*commande).getIDCommande() == (*m_commande[i]).getIDCommande()){
-			std::string statut = (*(m_commande[i])).getStatutCommande();
-			std::cout<<"Cette commande est "<< statut << std::endl;
-			do{
-				std::cout<<" 1 - Mettre le statut a Livree "<<std::endl;
-				std::cout<<" 2 - Mettre le statut a Non Livree"<<std::endl;
-				std::cout<< "Entrez votre choix"<< std::endl;
-				std::cin >> choix;
-				switch (choix) {
-					case 1 :
-						(*m_commande[i]).setStatutCommande(true);
-						break;
-					case 2 :
-						(*m_commande[i]).setStatutCommande(false);
-						break;
-				}
+		id_commande = (*m_commande[i]).getIDCommande();
+		if(id  == id_commande){
+			compteur++;
+			statut = (*(m_commande[i])).getStatutCommande();
+			if(statut == "Livrée"){
+				std::cout<< " Cette commande est dejà livrée "<<std::endl;
 			}
-			while(choix != 1 || choix != 2);
-		}
-		else{
-			std::cout<< "Aucune commande ne correspond"<<std::endl;
+			else{
+				// modifier les quantite en stock pour livrer la commande
+				std::vector<Produit*> liste_produit;
+				liste_produit = (*m_commande[i]).getProduitCommande();
+				for(int j=0; j < int(liste_produit.size()); j++){
+					 quantite_commande = (*liste_produit[j]).getQuantiteCommande();
+					 (*liste_produit[j]).modifQuantite( -quantite_commande);
+					 (*m_commande[i]).setStatutCommande(true);
+				}
+
+			}
 		}
 	}
-
+	if(compteur == 0){
+			std::cout<< " Aucune commande ne correspond"<<std::endl;		
+	}
 }
 
 
@@ -239,4 +246,57 @@ std::vector<Commande*> Magasin::getCommande() const {
 	return m_commande;
 }
 
+void Magasin::afficherListeCommande(){ // afficgher la liste de commande
+	int taille = m_commande.size();
+	std::cout<<std::endl;
+	std::cout<<" Liste des commandes"<<std::endl;
+	std::cout<<std::endl;
+	if(taille != 0){
+		for(int i=0; i<taille; i++){
+			std::cout<< " ID commande : " << (*m_commande[i]).getIDCommande() <<std::endl;
+			std::cout<<std::endl;
+			std::cout<< (*m_commande[i]).recupInfoClient() <<std::endl;
+			std::cout<< " Contenu de la commande "<<std::endl;
+			std::cout<< (*m_commande[i]).recupListeProduit() <<std::endl;
+			std::cout<< " Statut de le commande : " << (*m_commande[i]).getStatutCommande()<<std::endl;
+		}
+	}
+	else{
+		std::cout<< " Il n'y a pas de commande"<< std::endl;
+		std::cout<<std::endl;
+	}
+}
 
+// a retravailler
+void Magasin::afficherListeCommandeClient(Client *client){ // afficgher la liste de commande d'un client
+	int taille = m_commande.size();
+	std::cout<<std::endl;
+	Client *client_commande;
+	std::cout<<" Liste des commandes"<<std::endl;
+	std::cout<<std::endl;
+	if(taille != 0){
+		for(int j =0; j< int(m_commande.size()); j++){
+			client_commande = (*m_commande[j]).getClientCommande();
+			if((*client).getId() == (*client_commande).getId()){ //on verifie que le client fait partie des clients
+				std::cout<< " ID client : " << (*client_commande).getId() <<std::endl;
+				std::cout << " " << (*client_commande).getNom() << " " << (*client_commande).getPrenom() <<std::endl;
+				std::cout<<std::endl;
+				for(int i=0; i<taille; i++){
+					std::cout<< " ID commande : " << (*m_commande[i]).getIDCommande() <<std::endl;
+					std::cout<<std::endl;
+					std::cout<< " Contenu de la commande "<<std::endl;
+					std::cout<< (*m_commande[i]).recupListeProduit() <<std::endl;
+					std::cout<< " Statut de le commande : " << (*m_commande[i]).getStatutCommande()<<std::endl;
+				}
+			}
+			else{
+				std::cout<<" Auncun client correspondant "<<std::endl;
+			}
+		}
+	}
+	else{
+		std::cout<<std::endl;
+		std::cout<< " Il n'y a pas de commande"<< std::endl;
+		std::cout<<std::endl;
+	}
+}

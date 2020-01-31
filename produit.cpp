@@ -16,13 +16,13 @@ Produit::Produit(std::string titre, std::string detail, double prix, double quan
 		m_quantite = quantite;
 	}
 	else{
-		std::cout << "Erreur de quantite"<<std::endl;
+		std::cout << " Erreur de quantite"<<std::endl;
 	}
 	if(prix >=0){
 		m_prix = prix;
 	}
 	else{
-		std::cout<< "Prix incorrect"<< std::endl;
+		std::cout<< " Prix incorrect"<< std::endl;
 	}
 }
 
@@ -56,7 +56,7 @@ void Produit::setQuantite(double quantite){
 		m_quantite = quantite;
 	}
 	else{
-		std::cout << "Erreur de quantite"<<std::endl;
+		std::cout << " Erreur de quantite"<<std::endl;
 	}
 }
 
@@ -65,20 +65,33 @@ void Produit::setPrix(double prix){
 		m_prix = prix;
 	}
 	else{
-		std::cout<< "Prix incorrect"<< std::endl;
+		std::cout<< " Prix incorrect"<< std::endl;
 	}
 }
 
 void Produit::modifQuantite(double quantite){ // Pour mettre a jour les stocks en plus ou en moins 
+	double nouvelle_quantite;
+	if(m_quantite + quantite > 0){
 		m_quantite = m_quantite + quantite;
+	}
+	else{
+		do{
+			std::cout<< " Pas assez d'article en stock"<<std::endl;
+			std::cout<< " Entrez une nouvelle quantite "<<std::endl;
+			std::cin >> nouvelle_quantite;
+			m_quantite = m_quantite + nouvelle_quantite;
+		}
+		while(m_quantite + nouvelle_quantite < 0);
+
+	}
 }
 
-void Produit::setQuantiteCommande(double quantite_commande){
-	if(quantite_commande >=0 && m_quantite > quantite_commande){
+void Produit::setQuantiteCommande(double quantite_commande){ // Pour commander une certaine produit
+	if(quantite_commande >=0 && m_quantite > quantite_commande){ //on verifie que le produit existe
 		m_quantite_commande = quantite_commande;
 	}
 	else{
-		std::cout<< "Erreur de quantite ou pas assez d'article en stock "<< std::endl;
+		std::cout<< " Erreur de quantite ou pas assez d'article en stock "<< std::endl;
 	}
 
 }
@@ -89,7 +102,7 @@ double Produit::getQuantiteCommande() const{
 
 
 std::ostream& operator << (std::ostream & output, Produit obj){
-	output << obj.m_titre << std::endl << obj.m_detail << std::endl << "Prix unitaire : " << obj.m_prix<< std::endl << "Quantite restante : "<< obj.m_quantite << std::endl;
+	output << " "<<obj.m_titre << std::endl << " "<<obj.m_detail << std::endl << " Prix unitaire : " << obj.m_prix<< std::endl << " Quantite restante : "<< obj.m_quantite << std::endl;
 	return output;
 }
 
