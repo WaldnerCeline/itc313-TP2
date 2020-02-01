@@ -15,6 +15,7 @@
 #include "client.h"
 #include <iostream>
 #include <fstream>
+#include <cstdlib>
 
 
 void ecriture_fichier_Produit(Magasin EasyStore){
@@ -162,8 +163,8 @@ void ajoutProduit(Magasin EasyStore){
 	std::cout<<" Entrez la quantite a mettre en stock : "<<std::endl;
 	std::cin>>quantite;
 	std::cout<<std::endl;
-	Produit *ref_produit1; //declaration d'un pointeur sur un objet
-	ref_produit1 = new Produit(titre, detail, prix, quantite);
+	Produit *ref_produit1(0); //declaration d'un pointeur sur un objet
+	ref_produit1 = new Produit (titre, detail, prix, quantite);
 	EasyStore.ajouterProduit(ref_produit1);
 	std::vector<Produit*> produit;
 }
@@ -209,7 +210,7 @@ void ajoutClient(Magasin EasyStore){
 	client = EasyStore.getClient();
 	id = int(client.size() +1);
 	Client* ref_client1(0); //declaration d'un pointeur sur un objet
-	ref_client1 = new Client(id , nom, prenom, panier);
+	ref_client1 = new Client (id , nom, prenom, panier);
 	EasyStore.ajouterClient(ref_client1);
 }
 
@@ -218,17 +219,40 @@ void choixClient(Magasin EasyStore){
 	int id;
 	std::cout<<" Entrez l'ID d'un client : "<<std::endl;
 	std::cin>> id;
+	int compteur = 0;
 	std::vector<Client*> client;
 	client = EasyStore.getClient();
 	for(int i = 0; i<int(client.size()); i++){
 		if(id == (*client[i]).getId()){
 			EasyStore.afficherListeCommandeClient(client[i]);
-		}
-		else{
-			std::cout<< " Aucun client correspondant "<<std::endl;
+			compteur++;
 		}
 	}
+		if(compteur == int(client.size())){
+			std::cout<< " Aucun client correspondant "<<std::endl;
+		}
+}
 
+void infoClient(Magasin EasyStore){
+	int id;
+	std::string nom;
+	std::cout<<" Entrez l'ID d'un client : "<<std::endl;
+	std::cin>> id;
+	std::cout<<" Entrez le nom d'un client : "<<std::endl;
+	std::cin>> nom;
+	std::cout<<std::endl;
+	int compteur =0;
+	std::vector<Client*> client;
+	client = EasyStore.getClient();
+	for(int i = 0; i<int(client.size()); i++){
+		if(id == (*client[i]).getId() ||nom == (*client[i]).getNom()){
+			compteur++;
+			EasyStore.afficherClient(nom, id);
+		}
+	}
+		if(compteur == int(client.size())){
+			std::cout<< " Aucun client correspondant "<<std::endl;
+		}
 }
 
 void livraisonCommande(Magasin EasyStore){
@@ -289,7 +313,9 @@ void affichageClient(Magasin EasyStore){
 		std::cout<<std::endl;
 		std::cout<< " 2 - Affichage des clients"<<std::endl;
 		std::cout<<std::endl;
-		std::cout<< " 3 - Retour au menu principal"<<std::endl;
+		std::cout<< " 3 - Affichage des informations d'un client"<<std::endl;
+		std::cout<<std::endl;
+		std::cout<< " 4 - Retour au menu principal"<<std::endl;
 		std::cout<<std::endl;
 		std::cout<< " Entrez votre choix"<< std::endl;
 		std::cin >> choix;
@@ -303,6 +329,9 @@ void affichageClient(Magasin EasyStore){
 				EasyStore.afficherListeClient();
 				break;
 			case 3 :
+				infoClient(EasyStore);
+				break;
+			case 4 :
 				//retour au menu principal 
 				break;
 			default :
@@ -310,7 +339,7 @@ void affichageClient(Magasin EasyStore){
 				std::cout<<" Votre choix ne correspond à aucune proposition "<<std::endl;
 		}
 	}
-	while(choix != 3);
+	while(choix != 4);
 }
 
 
@@ -357,7 +386,7 @@ void affichageCommande(Magasin EasyStore){
 int affichageMenu(Magasin EasyStore){
 	int choix;
 	do{
-		//system("clear");
+		system("clear");
 		std::cout<<std::endl;
 		std::cout<<" Menu Principal "<<std::endl;
 		std::cout<<std::endl;

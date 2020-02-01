@@ -18,6 +18,10 @@ public:
 	std::string getNom()const;
 	std::string getPrenom()const;
 	std::vector<Produit*> getPanier()const;
+
+	void setId(int id);
+	void setNom(std::string nom);
+	void setPrenom(std::string prenom);
 	
 	
 

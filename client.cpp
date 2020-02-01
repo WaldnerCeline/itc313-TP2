@@ -28,6 +28,17 @@ std::vector<Produit*> Client::getPanier()const{
 	return m_panier;
 }
 
+void Client::setId(int id) {
+	m_id = id;
+}
+
+void Client::setNom(std::string nom) {
+	 m_nom= nom;
+}
+
+void Client::setPrenom(std::string prenom){
+	m_prenom = prenom;
+}
 
 
 void Client::ajouterProduit(Produit *produit, double quantite_commande){ // ajout d'un prdoduit au panier

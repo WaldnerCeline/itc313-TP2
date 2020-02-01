@@ -267,13 +267,12 @@ void Magasin::afficherListeCommande(){ // afficgher la liste de commande
 	}
 }
 
-// a retravailler
 void Magasin::afficherListeCommandeClient(Client *client){ // afficgher la liste de commande d'un client
-	int taille = m_commande.size();
-	std::cout<<std::endl;
 	Client *client_commande;
+	std::vector<Commande*> temp;
 	std::cout<<" Liste des commandes"<<std::endl;
 	std::cout<<std::endl;
+	int taille = m_commande.size();
 	if(taille != 0){
 		for(int j =0; j< int(m_commande.size()); j++){
 			client_commande = (*m_commande[j]).getClientCommande();
@@ -281,17 +280,22 @@ void Magasin::afficherListeCommandeClient(Client *client){ // afficgher la liste
 				std::cout<< " ID client : " << (*client_commande).getId() <<std::endl;
 				std::cout << " " << (*client_commande).getNom() << " " << (*client_commande).getPrenom() <<std::endl;
 				std::cout<<std::endl;
-				for(int i=0; i<taille; i++){
-					std::cout<< " ID commande : " << (*m_commande[i]).getIDCommande() <<std::endl;
-					std::cout<<std::endl;
-					std::cout<< " Contenu de la commande "<<std::endl;
-					std::cout<< (*m_commande[i]).recupListeProduit() <<std::endl;
-					std::cout<< " Statut de le commande : " << (*m_commande[i]).getStatutCommande()<<std::endl;
-				}
+				temp.push_back(m_commande[j]); // on stocke toutes les commandes d'un client
 			}
-			else{
-				std::cout<<" Auncun client correspondant "<<std::endl;
-			}
+			
+		}
+		for(int i=0; i<int(temp.size()); i++){
+			std::cout<<std::endl;	
+			std::cout<< " ID commande : " << (*temp[i]).getIDCommande() <<std::endl;
+			std::cout<<std::endl;
+			std::cout<< " Contenu de la commande "<<std::endl;
+			std::cout<< (*temp[i]).recupListeProduit() <<std::endl;
+			std::cout<< " Statut de le commande : " << (*temp[i]).getStatutCommande()<<std::endl;
+		}
+		if(int(temp.size()) == 0){
+			std::cout<<std::endl;
+			std::cout<<" Auncun client correspondant "<<std::endl;
+			std::cout<<std::endl;
 		}
 	}
 	else{
@@ -300,3 +304,4 @@ void Magasin::afficherListeCommandeClient(Client *client){ // afficgher la liste
 		std::cout<<std::endl;
 	}
 }
+
