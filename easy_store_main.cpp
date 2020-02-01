@@ -405,7 +405,7 @@ void affichageCommande(Magasin EasyStore){
 int affichageMenu(Magasin EasyStore, Client* ref_client,  Produit* ref_produit){
 	int choix;
 	do{
-		system("clear");
+		system("clear"); // pour vider l'affichage console
 		std::cout<<std::endl;
 		std::cout<<" Menu Principal "<<std::endl;
 		std::cout<<std::endl;
@@ -492,12 +492,9 @@ int main(){
 	ecriture_fichier_Client(EasyStore);
 	ecriture_fichier_Commande(EasyStore);
 
-	Produit* ref_produit;
-	Client* ref_client;
+	Produit* ref_produit;//pointeur sur objet produit
+	Client* ref_client;// pointeur sur objet client
 	affichageMenu(EasyStore, ref_client, ref_produit);
-	
-	
-
 
 return 0;	
 
