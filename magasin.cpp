@@ -17,7 +17,6 @@ Magasin::Magasin(std::vector<Produit*> liste_produit, std::vector<Client*> liste
 
 void Magasin::ajouterProduit(Produit *produit){ // on ajoute un produit au stock du magasin
 	m_produit.push_back(produit);
-	
 }
 
 
@@ -25,12 +24,8 @@ void Magasin::afficherListeProduit(){ //affichage de la liste des produits du ma
 
 	std::string res = "";
 	int taille = m_produit.size();
-	std::cout<<"Taille mproduit" << taille <<std::endl;
 	std::cout<<" Inventaire du magasin "<<std::endl;
 	std::cout<<std::endl;
-	for(int i=0; i< int(m_produit.size()); i++){
-		std::cout<<"verif 2 "<< (*m_produit[i])<< std::endl;
-	}
 	for(int i=0; i<taille; i++)
 	{
 		res +=" "+(*m_produit[i]).getTitre()+"\n";
@@ -294,7 +289,7 @@ void Magasin::afficherListeCommandeClient(Client *client){ // afficgher la liste
 		}
 		if(int(temp.size()) == 0){
 			std::cout<<std::endl;
-			std::cout<<" Auncun client correspondant "<<std::endl;
+			std::cout<<" Auncun client correspondant ou pas de commande pour ce client "<<std::endl;
 			std::cout<<std::endl;
 		}
 	}

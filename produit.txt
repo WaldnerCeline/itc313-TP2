@@ -15,3 +15,8 @@
  Prix unitaire : 8.5
  Quantite restante : 10
 
+ Fraise
+ barquette de 250g de fraises
+ Prix unitaire : 1.5
+ Quantite restante : 10
+

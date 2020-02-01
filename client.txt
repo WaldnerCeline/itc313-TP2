@@ -1,8 +1,8 @@
  Liste des clients 
 
-  client : 1
+ ID client : 1
  Dupont Pierre
 
-  client : 2
+ ID client : 2
  Potter Harry
 

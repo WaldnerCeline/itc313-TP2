@@ -70,7 +70,7 @@ void ecriture_fichier_Client(Magasin EasyStore){
       	monFlux << " Liste des clients "<<std::endl;
       	monFlux << std::endl;
        for(int i = 0; i< int(client.size()); i++){
-       	monFlux << "  client : " << (*client[i]).getId()<<std::endl;
+       	monFlux << " ID client : " << (*client[i]).getId()<<std::endl;
        	monFlux << " " << (*client[i]).getNom()<< " " << (*client[i]).getPrenom() << std::endl;
        	monFlux << std::endl;
      	}
@@ -146,16 +146,19 @@ void lecture_fichier_Commande(){
 }
 
 
-void ajoutProduit(Magasin EasyStore){
+Produit* ajoutProduit(){
 	std::string titre;
 	std::string detail;
 	double prix;
 	double quantite;
+	std::string temp = " ";
 	std::cout<<" Entrez le nom du nouveau produit : "<<std::endl;
-	std::cin>> titre;
+	std::cin>>temp;
+	getline (std::cin, titre);
+	titre = temp+ titre;
 	std::cout<<std::endl;
-	std::cout<< " Quel est le detail de ce produit (en un seul mot) : "<<std::endl;
-	std::cin>> detail;
+	std::cout<< " Quel est le detail de ce produit : "<<std::endl;
+	getline (std::cin, detail);
 	std::cout<<std::endl;
 	std::cout<<" Entrez le prix unitaire du produit : "<<std::endl;
 	std::cin>>prix;
@@ -163,10 +166,9 @@ void ajoutProduit(Magasin EasyStore){
 	std::cout<<" Entrez la quantite a mettre en stock : "<<std::endl;
 	std::cin>>quantite;
 	std::cout<<std::endl;
-	Produit *ref_produit1(0); //declaration d'un pointeur sur un objet
-	ref_produit1 = new Produit (titre, detail, prix, quantite);
-	EasyStore.ajouterProduit(ref_produit1);
-	std::vector<Produit*> produit;
+	Produit* ref_produit(0); //declaration d'un pointeur sur un objet
+	ref_produit = new Produit (titre, detail, prix, quantite);
+return ref_produit;
 }
 
 
@@ -177,8 +179,11 @@ void majQuantite(Magasin EasyStore){
 	int compteur=0;
 	std::vector<Produit*> produit;
 	produit = EasyStore.getProduit();
+	std::string temp = " ";
 	std::cout<<" Entrez le nom du produit a modifier "<<std::endl;
-	std::cin>> nom;
+	std::cin>> temp;
+	getline (std::cin, nom);
+	nom = temp+ nom;
 	for(int i = 0; i<int(produit.size()); i++){
 		if( nom == (*produit[i]).getTitre()){
 			compteur++;
@@ -195,23 +200,27 @@ void majQuantite(Magasin EasyStore){
 	}
 }
 
-void ajoutClient(Magasin EasyStore){
+Client* ajoutClient(Magasin EasyStore){
 	std::string nom;
 	std::string prenom;
 	int id;
 	std::vector<Client*> client;
 	std::vector<Produit*> panier;
+	std::string temp = " ";
 	std::cout<<" Entrez le nom du nouveau client : "<<std::endl;
-	std::cin>> nom;
+	std::cin>>temp;
+	getline (std::cin, nom);
+	nom = temp+ nom;
 	std::cout<<std::endl;
 	std::cout<< " Quel est le prenom du nouveau client : "<<std::endl;
-	std::cin>>prenom;
+	getline (std::cin, prenom);
 	std::cout<<std::endl;
 	client = EasyStore.getClient();
 	id = int(client.size() +1);
-	Client* ref_client1(0); //declaration d'un pointeur sur un objet
-	ref_client1 = new Client (id , nom, prenom, panier);
-	EasyStore.ajouterClient(ref_client1);
+	Client* ref_client(0); //declaration d'un pointeur sur un objet
+	ref_client = new Client (id , nom, prenom, panier);
+	
+return ref_client;
 }
 
 
@@ -236,10 +245,13 @@ void choixClient(Magasin EasyStore){
 void infoClient(Magasin EasyStore){
 	int id;
 	std::string nom;
+	std::string temp = " ";
 	std::cout<<" Entrez l'ID d'un client : "<<std::endl;
 	std::cin>> id;
 	std::cout<<" Entrez le nom d'un client : "<<std::endl;
-	std::cin>> nom;
+	std::cin>> temp;
+	getline (std::cin, nom);
+	nom = temp+ nom;
 	std::cout<<std::endl;
 	int compteur =0;
 	std::vector<Client*> client;
@@ -262,8 +274,9 @@ void livraisonCommande(Magasin EasyStore){
 	EasyStore.changerStatutCommande(id);
 }
 
-void affichageMagasin(Magasin EasyStore){
+void affichageMagasin(Magasin EasyStore, Produit* ref_produit){
 	int choix;
+	
 	system("clear");
 	do{
 		std::cout<<std::endl;
@@ -283,7 +296,9 @@ void affichageMagasin(Magasin EasyStore){
 
 		switch (choix) {
 			case 1 :
-				ajoutProduit(EasyStore);
+				ref_produit = ajoutProduit();
+				EasyStore.ajouterProduit(ref_produit);
+
 				break;
 			case 2 :
 				EasyStore.afficherListeProduit();
@@ -298,11 +313,12 @@ void affichageMagasin(Magasin EasyStore){
 				std::cout<<std::endl;
 				std::cout<<" Votre choix ne correspond à aucune proposition "<<std::endl;
 		}
+		ecriture_fichier_Produit(EasyStore);
 	}
 	while(choix != 4 );
 }
 
-void affichageClient(Magasin EasyStore){
+void affichageClient(Magasin EasyStore, Client* ref_client){
 	system("clear");
 	int choix;
 	do{
@@ -323,7 +339,8 @@ void affichageClient(Magasin EasyStore){
 
 		switch (choix) {
 			case 1 :
-				ajoutClient(EasyStore);
+				ref_client = ajoutClient(EasyStore);
+				EasyStore.ajouterClient(ref_client);
 				break;
 			case 2 :
 				EasyStore.afficherListeClient();
@@ -338,6 +355,7 @@ void affichageClient(Magasin EasyStore){
 				std::cout<<std::endl;
 				std::cout<<" Votre choix ne correspond à aucune proposition "<<std::endl;
 		}
+		ecriture_fichier_Client(EasyStore);
 	}
 	while(choix != 4);
 }
@@ -379,11 +397,12 @@ void affichageCommande(Magasin EasyStore){
 				std::cout<<std::endl;
 				std::cout<<" Votre choix ne correspond à aucune proposition "<<std::endl;
 		}
+		ecriture_fichier_Commande(EasyStore);
 	}
 	while(choix != 4);
 }
 
-int affichageMenu(Magasin EasyStore){
+int affichageMenu(Magasin EasyStore, Client* ref_client,  Produit* ref_produit){
 	int choix;
 	do{
 		system("clear");
@@ -404,10 +423,10 @@ int affichageMenu(Magasin EasyStore){
 
 		switch (choix) {
 			case 1 :
-				affichageMagasin(EasyStore);
+				affichageMagasin(EasyStore, ref_produit);
 				break;
 			case 2 :
-				affichageClient(EasyStore);
+				affichageClient(EasyStore, ref_client);
 				break;
 			case 3 :
 				affichageCommande(EasyStore);
@@ -434,12 +453,12 @@ int main(){
 	Magasin EasyStore(liste_produit, liste_client, liste_commande);
 	
 	Client c1(1,"Dupont","Pierre",panier);
-	Client *ref_client;
-	ref_client = &c1;
+	Client *ref_c1;
+	ref_c1 = &c1;
 
 	Client c2(2,"Potter","Harry",panier2);
-	Client *ref_client2;
-	ref_client2 = &c2;
+	Client *ref_c2;
+	ref_c2 = &c2;
 
 	
 	Produit p1("PS5", " Console de jeu de marque Sony", 249.99, 10);
@@ -453,26 +472,30 @@ int main(){
 	ref_pr2 = &p2;
 
 	Produit produit("Jambon","Le jambon c'est bon",8.5,10);
-	Produit *ref_produit;
-	ref_produit = &produit;
+	Produit *ref_pr3;
+	ref_pr3 = &produit;
 
 	EasyStore.ajouterProduit(ref_pr1);
 	EasyStore.ajouterProduit(ref_pr2);
-	EasyStore.ajouterProduit(ref_produit);
+	EasyStore.ajouterProduit(ref_pr3);
 
-	EasyStore.ajouterClient(ref_client);
-	EasyStore.ajouterClient(ref_client2);
+	EasyStore.ajouterClient(ref_c1);
+	EasyStore.ajouterClient(ref_c2);
 	
-	EasyStore.ajouterProduitClient(ref_client, ref_pr1, 3);
-	EasyStore.ajouterProduitClient(ref_client, ref_pr2, 5);
-	EasyStore.ajouterProduitClient(ref_client2, ref_produit, 2);
-	EasyStore.validerCommande(ref_client);
-	EasyStore.validerCommande(ref_client2);
+	EasyStore.ajouterProduitClient(ref_c1, ref_pr1, 3);
+	EasyStore.ajouterProduitClient(ref_c1, ref_pr2, 5);
+	EasyStore.ajouterProduitClient(ref_c2, ref_pr3, 2);
+	EasyStore.validerCommande(ref_c1);
+	EasyStore.validerCommande(ref_c2);
 
-	affichageMenu(EasyStore);
 	ecriture_fichier_Produit(EasyStore);
 	ecriture_fichier_Client(EasyStore);
 	ecriture_fichier_Commande(EasyStore);
+
+	Produit* ref_produit;
+	Client* ref_client;
+	affichageMenu(EasyStore, ref_client, ref_produit);
+	
 	
 
 

@@ -71,17 +71,17 @@ void Produit::setPrix(double prix){
 
 void Produit::modifQuantite(double quantite){ // Pour mettre a jour les stocks en plus ou en moins 
 	double nouvelle_quantite;
-	if(m_quantite + quantite > 0){
+	if(m_quantite + quantite >=  0){
 		m_quantite = m_quantite + quantite;
 	}
 	else{
 		do{
-			std::cout<< " Pas assez d'article en stock"<<std::endl;
+			std::cout<< " Pas assez d'article en stock, quantite restante : "<< m_quantite <<std::endl;
 			std::cout<< " Entrez une nouvelle quantite "<<std::endl;
 			std::cin >> nouvelle_quantite;
 			m_quantite = m_quantite + nouvelle_quantite;
 		}
-		while(m_quantite + nouvelle_quantite < 0);
+		while(m_quantite + nouvelle_quantite < 0 );
 
 	}
 }

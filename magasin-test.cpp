@@ -24,21 +24,33 @@ int main(){
 	Client *ref_client2;
 	ref_client2 = &c2;
 
+	
+
+	
+
 	Produit p1("Jambon","Le jambon c'est bon",8.5,10);
 	Produit *ref_produit;
 	ref_produit = &p1;
+
+	std::vector<Produit*> panier3 = {ref_produit};
+
+	Client c3(3,"Holmes","Sherlock",panier3);
+	Client *ref_client3;
+	ref_client3 = &c3;
+
 	EasyStore.ajouterProduit(ref_produit);
 	//EasyStore.afficherListeProduit();
 	EasyStore.ajouterClient(ref_client);
 	EasyStore.ajouterClient(ref_client2);
 
 
-	EasyStore.afficherListeClient();
+	
 	EasyStore.ajouterProduitClient(ref_client, ref_produit, 3);
 	;
-	EasyStore.validerCommande(ref_client);
+	EasyStore.validerCommande(ref_client3);
+	EasyStore.afficherListeClient();
 	EasyStore.changerStatutCommande(id);
-	//EasyStore.afficherListeCommande();
+	EasyStore.afficherListeCommande();
 	//EasyStore.afficherListeCommandeClient(ref_client);
 	EasyStore.afficherListeCommandeClient(ref_client2);
 
